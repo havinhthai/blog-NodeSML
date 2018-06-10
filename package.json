@@ -1,0 +1,29 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/havinhthai/blog-demo.git"
+  },
+  "keywords": [
+    "NodeJS"
+  ],
+  "author": "Vinh Thai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/havinhthai/blog-demo/issues"
+  },
+  "homepage": "https://github.com/havinhthai/blog-demo#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0"
+  }
+}

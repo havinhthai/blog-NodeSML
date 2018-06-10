@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | Starter</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+  <% include common/head.ejs %>
+  <link rel="stylesheet" href="/public/admin/vendors/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="/public/admin/css/alt/AdminLTE-select2.min.css">
+</head>
+<body class="hold-transition skin-purple sidebar-mini">
+  <div class="wrapper">
+
+    <!-- Main Header -->
+    <% include common/header.ejs %>
+
+    <!-- Left side column. contains the logo and sidebar -->
+    <% include common/aside.ejs %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          Đăng bài <small>Optional description</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+          <li class="active">Here</li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content container">
+
+        <form action="" method="post">
+          <div class="form-group">
+            <label for="title">Tiêu đề</label>
+            <input type="text" class="form-control" name="title" id="title" autocomplete="off" autofocus placeholder="Nhập tiêu đề bài đăng">
+          </div>
+          <div class="form-group">
+            <label for="description">Mô tả</label>
+            <textarea class="form-control" name="description" id="description" autocomplete="off" placeholder="Nhập mô tả"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="content">Nội dung</label>
+            <textarea class="form-control" rows="10" id="content" name="content" autocomplete="off" placeholder="Nội dung bài đăng"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="author">Tác giả</label>
+            <input type="text" class="form-control" name="author" id="author" autocomplete="off" value="Tác giả" disabled>
+          </div>
+          <div class="form-group">
+            <label for="category">Chuyên mục</label>
+            <select class="form-control select2" id="category" multiple="multiple">
+              <option selected="selected" value="Javascript">Javascript</option>
+              <option value="Framework">Framework</option>
+              <option value="Library">Library</option>
+              <option value="Pattern">Pattern</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </form>
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <% include common/footer.ejs %>
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- REQUIRED JS SCRIPTS -->
+
+  <% include common/script.ejs %>
+
+  <script src="/public/admin/vendors/select2/dist/js/select2.full.min.js"></script>
+  <script src="/public/admin/vendors/tinymce/tinymce.min.js"></script>
+  <script src="/public/admin/js/post_add.min.js"></script>
+
+</body>
+</html>

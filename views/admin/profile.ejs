@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | Starter</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  
+  <% include common/head.ejs %>
+  <link rel="stylesheet" href="/public/admin/vendors/Croppie/croppie.css">
+
+</head>
+<body class="hold-transition skin-purple sidebar-mini">
+  <div class="wrapper">
+
+  <!-- Main Header -->
+  <% include common/header.ejs %>
+
+  <!-- Left side column. contains the logo and sidebar -->
+  <% include common/aside.ejs %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          Hồ sơ cá nhân
+          <small>Optional description</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+          <li class="active">Here</li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content container">
+        <div class="user-profile">
+          <form action="" method="post">
+            <div class="row box-user">
+              <div class="col-md-3">
+                <h4 class="box-title">Ảnh đại diện</h4>
+              </div>
+              <div class="col-md-9">
+                <img src="" alt>
+
+                <button type="button" class="btn btn-primary btn-lg btn-change-avatar" data-toggle="modal" data-target="#modal-change-avatar">
+                  <i class="fa fa-upload" aria-hidden="true"></i> CẬP NHẬT ẢNH ĐẠI DIỆN
+                </button>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+              <div class="col-md-3">
+                <h4 class="box-title">Email</h4>
+              </div>
+              <div class="col-md-9">
+                <input type="email" value="vinhthai997@gmail.com" class="input-lg" disabled>
+                <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#modal-change-email">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Chỉnh sửa
+                </button>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+              <div class="col-md-3">
+                <h4 class="box-title">Password</h4>
+              </div>
+              <div class="col-md-9">
+                <input type="password" value="vinhthai997@gmail.com" class="input-lg" disabled>
+                <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#modal-change-password">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Chỉnh sửa
+                </button>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+              <div class="col-md-3">
+                <h4 class="box-title">Họ và tên</h4>
+              </div>
+              <div class="col-md-9">
+                <input type="text" value="Hà Vĩnh Thái" class="form-control input-lg">
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+              <div class="col-md-3">
+                <h4 class="box-title">Số điện thoại</h4>
+              </div>
+              <div class="col-md-9">
+                <input type="text" value="0902782844" class="form-control input-lg">
+              </div>
+            </div>
+
+            <hr>
+
+            <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu thông tin</button>
+          </form>
+        </div>
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <div class="modal fade" id="modal-change-avatar">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Thay đổi ảnh đại diện</h4>
+          </div>
+          <div class="modal-body">
+            <div class="image-wrap upload-avatar">
+              <div class="actions hidden">
+                <a class="btn file-btn">
+                  <input type="file" id="upload" value="Choose a file" accept="image/*" />
+                </a>
+              </div>
+
+              <label class="upload-avatar-msg" for="upload">
+                Tải ảnh lên
+              </label>
+
+              <div class="upload-avatar-wrap">
+                <div id="upload-avatar"></div>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left btn-lg" data-dismiss="modal">Đóng</button>
+            <button type="button" class="btn btn-primary upload-avatar-result btn-lg">Lưu thay đổi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modal-change-email">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Thay đổi Email</h4>
+          </div>
+          <div class="modal-body">
+            <input type="email" placeholder="Nhập Email mới" class="form-control input-lg" autofocus>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left btn-lg" data-dismiss="modal">Đóng</button>
+            <button type="button" class="btn btn-primary btn-lg">Lưu thay đổi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="modal-change-password">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Thay đổi Mật khẩu</h4>
+          </div>
+          <div class="modal-body">
+            <input type="password" placeholder="Nhập Mật khẩu hiện tại" class="form-control input-lg" autofocus>
+            <hr>
+            <input type="password" placeholder="Nhập Mật khẩu mới" class="form-control input-lg">
+            <hr>
+            <input type="password" placeholder="Xác nhận mật khẩu" class="form-control input-lg">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left btn-lg" data-dismiss="modal">Đóng</button>
+            <button type="button" class="btn btn-primary btn-lg">Lưu thay đổi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal -->
+
+    <!-- Main Footer -->
+    <% include common/footer.ejs %>
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- REQUIRED JS SCRIPTS -->
+
+  <% include common/script.ejs %>
+
+  <script src="/public/admin/vendors/Croppie/croppie.min.js"></script>
+
+  <script src="/public/admin/js/profile.js"></script>
+</body>
+</html>

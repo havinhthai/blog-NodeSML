@@ -1,0 +1,66 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js dev
+
+PATH: 
+  C:\Users\PC\bin;D:\Git\mingw64\bin;D:\Git\usr\local\bin;D:\Git\usr\bin;D:\Git\usr\bin;D:\Git\mingw64\bin;D:\Git\usr\bin;C:\Users\PC\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn;C:\Program Files\Microsoft SQL Server\140\Tools\Binn;C:\Program Files\Microsoft SQL Server\140\DTS\Binn;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\ProgramData\chocolatey\bin;C:\Program Files\Java\jdk1.8.0_162\bin;D:\Git\cmd;C:\Program Files (x86)\Yarn\bin;C:\Program Files\dotnet;C:\Program Files\nodejs;C:\Program Files (x86)\Microsoft SQL Server\140\DTS\Binn;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\ManagementStudio;C:\Program Files (x86)\Common Files\Acronis\VirtualFile;C:\Program Files (x86)\Common Files\Acronis\VirtualFile64;C:\Program Files (x86)\Common Files\Acronis\FileProtector;C:\Program Files (x86)\Common Files\Acronis\FileProtector64;C:\Program Files (x86)\Common Files\Acronis\SnapAPI;C:\Users\PC\AppData\Local\Programs\Python\Python36-32\Scripts;C:\Users\PC\AppData\Local\Programs\Python\Python36-32;C:\Ruby24-x64\bin;C:\Users\PC\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Heroku\bin;D:\Genymotion\tools;C:\Users\PC\AppData\Local\now-cli;D:\Microsoft VS Code\bin;C:\Users\PC\AppData\Local\Yarn\bin;C:\Users\PC\AppData\Roaming\npm;D:\Git\usr\bin\vendor_perl;D:\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  10.3.0
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  {
+    "name": "blog",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node app.js",
+      "dev": "nodemon app.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/havinhthai/blog-demo.git"
+    },
+    "keywords": [
+      "NodeJS"
+    ],
+    "author": "Vinh Thai",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/havinhthai/blog-demo/issues"
+    },
+    "homepage": "https://github.com/havinhthai/blog-demo#readme",
+    "dependencies": {
+      "ejs": "^2.6.1",
+      "express": "^4.16.3",
+      "morgan": "^1.9.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Command failed.
+  Exit code: 134
+  Command: C:\WINDOWS\system32\cmd.exe
+  Arguments: /d /s /c nodemon app.js
+  Directory: D:\Programming\WebstormProjects\blog
+  Output:
+  
+      at ProcessTermError.MessageError (C:\Program Files (x86)\Yarn\lib\cli.js:186:110)
+      at new ProcessTermError (C:\Program Files (x86)\Yarn\lib\cli.js:226:113)
+      at ChildProcess.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:30281:17)
+      at ChildProcess.emit (events.js:182:13)
+      at maybeClose (internal/child_process.js:961:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:248:5)
