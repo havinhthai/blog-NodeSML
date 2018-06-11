@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const { port, dbUrl } = require('./config/config'); // { port: 3000 }
 const routers = require('./routers');
@@ -17,6 +18,8 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
 
 app.use('/public', express.static('./public'));
 
