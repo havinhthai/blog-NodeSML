@@ -17,22 +17,37 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
     const { email, password } = req.body;
-    const user = new User({
-        email,
-        password,
-    });
 
-    // user.email = email;
-    // user.password = password;
-
-    user.save((err, user) => {
+    User.findOne({ email: req.body.email }, (err, user) => {
         if (err) {
-            console.log('> Error create User:', err);
+            console.log(err);
             return;
         }
 
-        console.log('Created user:', user);
-    })
+        if (user) {
+            console.log('>> User dang ky');
+            return;
+        }
+
+        const cUser = new User({
+            email,
+            password,
+        });
+
+        // cUser.email = email;
+        // cUser.password = password;
+
+        cUser.save((err, user) => {
+            if (err) {
+                console.log('> Error create User:', err);
+                return;
+            }
+
+            console.log('Created user:', user);
+            res.redirect('/admin');
+        });
+    });
+
 });
 
 router.get('/post/add', (req, res) => {
