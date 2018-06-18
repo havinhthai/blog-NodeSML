@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const router = express.Router();
 
 const User = require('../models/user/user.model');
@@ -9,6 +10,26 @@ router.get('/', (req, res) => {
 
 router.get('/login', (req, res) => {
     res.render('admin/login');
+});
+
+router.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    User.findOne({ email: username }, (err, user) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+        const isMatchPassword = bcrypt.compareSync(password, user.password);
+        
+        if (!user || !isMatchPassword) {
+            console.log('>> Sai ten dang nhap hoac mk');
+            res.redirect('/admin/login');
+        }
+
+        res.redirect('/admin');
+    });
 });
 
 router.get('/register', (req, res) => {
