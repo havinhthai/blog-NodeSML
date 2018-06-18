@@ -2,8 +2,10 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const flash = require('connect-flash');
 
-const { port, dbUrl } = require('./config/config'); // { port: 3000 }
+const { port, dbUrl, sessionSecret } = require('./config/config'); // { port: 3000 }
 const routers = require('./routers');
 
 mongoose.Promise = global.Promise;
@@ -19,7 +21,13 @@ app.set('views', './views');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(session({
+    secret: sessionSecret,
+    resave: false,
+    saveUninitialized: true
+}));
+app.use(flash());
 
 app.use('/public', express.static('./public'));
 
