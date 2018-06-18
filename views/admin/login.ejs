@@ -16,9 +16,22 @@
   <div class="login-logo">
     <a href="#"><b>Admin</b>LTE</a>
   </div>
+
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Đăng nhập</p>
+
+      <% if (flash_messages) { %>
+        <%  for (let prop in flash_messages) { %>
+          <% flash_messages[prop].forEach(e => { %>
+            <div class="alert alert-<%= prop %>" role="alert">
+               <%= e %>
+            </div>
+          <% }) %>         
+        <% } %>
+      <% } %>
+
+
 
     <form action="/admin/login" method="post">
       <div class="form-group has-feedback">
