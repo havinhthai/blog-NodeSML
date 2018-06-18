@@ -20,12 +20,11 @@ router.post('/login', (req, res) => {
             console.log(err);
             return;
         }
-
-        const isMatchPassword = bcrypt.compareSync(password, user.password);
-        
-        if (!user || !isMatchPassword) {
+       
+        if (!user || !bcrypt.compareSync(password, user.password)) {
             console.log('>> Sai ten dang nhap hoac mk');
-            res.redirect('/admin/login');
+            
+            return res.redirect('/admin/login');
         }
 
         res.redirect('/admin');
