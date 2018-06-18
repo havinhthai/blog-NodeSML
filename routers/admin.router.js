@@ -1,8 +1,13 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const {
+    validationResult,
+} = require('express-validator/check');
 const router = express.Router();
 
 const User = require('../models/user/user.model');
+
+const { checkLogin, checkRegister } = require('../config/validate');
 
 router.get('/', (req, res) => {
     res.render('admin/index');
@@ -12,18 +17,25 @@ router.get('/login', (req, res) => {
     res.render('admin/login');
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', checkLogin, (req, res) => {
     const { username, password } = req.body;
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        console.log(errors.array());
+        return res.redirect('/admin/login');
+    }
 
     User.findOne({ email: username }, (err, user) => {
         if (err) {
             console.log(err);
             return;
         }
-       
+
         if (!user || !bcrypt.compareSync(password, user.password)) {
             console.log('>> Sai ten dang nhap hoac mk');
-            
+
             return res.redirect('/admin/login');
         }
 
@@ -35,8 +47,15 @@ router.get('/register', (req, res) => {
     res.render('admin/register');
 });
 
-router.post('/register', (req, res) => {
+router.post('/register', checkRegister, (req, res) => {
     const { email, password } = req.body;
+    
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        console.log(errors.array());
+        return res.redirect('/admin/register');
+    }
 
     User.findOne({ email: req.body.email }, (err, user) => {
         if (err) {
