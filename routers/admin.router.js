@@ -9,6 +9,12 @@ const User = require('../models/user/user.model');
 
 const { checkLogin, checkRegister } = require('../config/validate');
 
+router.use((req, res, next) => {
+    res.locals.flash_messages = req.session.flash;
+    delete req.session.flash;
+    next();
+});
+
 router.get('/', (req, res) => {
     res.render('admin/index');
 });
@@ -23,18 +29,21 @@ router.post('/login', checkLogin, (req, res) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        console.log(errors.array());
+        // [1, 2, 3, { a: 1 }]
+        errors.array().forEach(e => {
+            req.flash('danger', e.msg);
+        });
         return res.redirect('/admin/login');
     }
 
     User.findOne({ email: username }, (err, user) => {
         if (err) {
-            console.log(err);
+            req.flash('danger', err.toString());
             return;
         }
 
         if (!user || !bcrypt.compareSync(password, user.password)) {
-            console.log('>> Sai ten dang nhap hoac mk');
+             req.flash('danger', 'Wrong username or password type');
 
             return res.redirect('/admin/login');
         }

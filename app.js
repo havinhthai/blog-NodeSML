@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
+const MongoStore = require('connect-mongo')(session);
 
 const { port, dbUrl, sessionSecret } = require('./config/config'); // { port: 3000 }
 const routers = require('./routers');
@@ -25,7 +26,8 @@ app.use(bodyParser.json());
 app.use(session({
     secret: sessionSecret,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new MongoStore({ url: dbUrl }),
 }));
 app.use(flash());
 
