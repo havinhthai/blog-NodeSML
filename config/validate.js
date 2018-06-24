@@ -10,7 +10,9 @@ const checkLogin = [
 const checkRegister = [
     check('email').isEmail().withMessage('Email invalid'),
     check('password').not().isEmpty().withMessage('Password is required'),
-    check('repassword').matches('password').withMessage('Password is not match'),
+    check('repassword', 'Password is not match').custom((value, { req }) => (
+        req.body.password === value
+    )),
 ];
 
 module.exports = {
