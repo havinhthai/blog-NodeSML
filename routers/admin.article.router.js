@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {
     addArticle,
+    getArticles,
 } = require('../controllers/admin.article.controller');
 const { checkArticle } = require('../config/validate');
 
@@ -13,5 +14,9 @@ router.route('/add')
     .post(checkArticle, (req, res) => {
         addArticle(req, res);
     });
+
+router.get('/manage', (req, res) => {
+    getArticles(req, res);
+});
 
 module.exports = router;

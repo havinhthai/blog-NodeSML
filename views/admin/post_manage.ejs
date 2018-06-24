@@ -57,30 +57,19 @@
                   </tr>
                   </thead>
                   <tbody>
+                  <% articles.forEach((article) => { %>
                   <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
+                    <td><%= article.title %></td>
+                    <td><%= article.author.email %></td>
+                    <td>Free</td>
+                    <td><%= new Date(article.updatedAt).toLocaleDateString() %></td>
                     <td>
                       <a href="#" class="btn btn-warning">Chỉnh sửa</a>
                       <a href="#" class="btn btn-danger">Xóa</a>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 5.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td>5</td>
-                    <td>
-                      <a href="#" class="btn btn-warning">Chỉnh sửa</a>
-                      <a href="#" class="btn btn-danger">Xóa</a>
-                    </td>
-                  </tr>
+                  <% }); %>
+                
                   </tbody>
                   <tfoot>
                   <tr>

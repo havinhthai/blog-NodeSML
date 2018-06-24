@@ -42,10 +42,34 @@ const addArticle = (req, res, next) => {
             return;
         }
 
-        res.redirect('/admin/dashboard');
+        res.redirect('/admin/manage');
     });
 };
 
+const getArticles = (req, res) => {
+     Article
+        .find()
+        .populate('author', '-_id email')
+        .select({
+            title: 1,
+            author: 1,
+            updatedAt: 1,
+        })
+        .exec((err, articles) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+
+            console.log(articles);
+
+            res.render('admin/post_manage', {
+                articles,
+            });
+        });
+}
+
 module.exports = {
     addArticle,
+    getArticles,
 };
