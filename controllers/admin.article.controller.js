@@ -39,10 +39,25 @@ const addArticle = (req, res, next) => {
     article.save((err) => {
         if (err) {
             console.log(err);
-            return;
+            req.flash('danger', 'Add article failed');
+            return res.redirect('/admin/article/add');
         }
 
-        res.redirect('/admin/manage');
+        req.flash('success', 'Add article successfully');
+        res.redirect('/admin/article/manage');
+    });
+};
+
+const deleteArticle = (req, res) => {
+    Article.deleteOne({ _id: req.params.id }, (err) => {
+        if (err) {
+            console.log(err);
+            req.flash('danger', 'Delete article failed');
+            return res.redirect('/admin/article/manage');
+        }
+
+        req.flash('success', 'Delete article successfully');
+        res.redirect('/admin/article/manage');
     });
 };
 
@@ -61,8 +76,6 @@ const getArticles = (req, res) => {
                 return;
             }
 
-            console.log(articles);
-
             res.render('admin/post_manage', {
                 articles,
             });
@@ -71,5 +84,6 @@ const getArticles = (req, res) => {
 
 module.exports = {
     addArticle,
+    deleteArticle,
     getArticles,
 };
