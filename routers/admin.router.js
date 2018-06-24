@@ -15,14 +15,20 @@ router.use((req, res, next) => {
     next();
 });
 
+router.use(['/login', '/register'], (req, res, next) => {
+    if (req.session.user) {
+        return res.redirect('/admin/dashboard');
+    }
+
+    next();
+});
+
 router.get('/login', (req, res) => {
     res.render('admin/login');
 });
 
 router.post('/login', checkLogin, (req, res) => {
     const { username, password } = req.body;
-
-    console.log('>> Body:', req.body);
 
     const errors = validationResult(req);
 
@@ -48,7 +54,7 @@ router.post('/login', checkLogin, (req, res) => {
 
         // Login successssssss
         req.session.user = user;
-        res.redirect('/admin');
+        res.redirect('/admin/dashboard');
     });
 });
 
@@ -92,13 +98,14 @@ router.post('/register', checkRegister, (req, res) => {
             }
 
             req.session.user = user;
-            res.redirect('/admin');
+            res.redirect('/admin/dashboard');
         });
     });
 
 });
 
 router.use((req, res, next) => {
+    console.log('>> User', req.session.user);
     if (req.session.user) {
         res.locals.cUser = req.session.user;
         return next();
@@ -108,7 +115,7 @@ router.use((req, res, next) => {
     res.redirect('/admin/login');
 });
 
-router.get('/', (req, res) => {
+router.get('/dashboard', (req, res) => {
     res.render('admin/index');
 });
 
@@ -122,6 +129,17 @@ router.get('/post/manage', (req, res) => {
 
 router.get('/profile', (req, res) => {
     res.render('admin/profile');
+});
+
+router.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+        res.redirect('/admin/login');
+    });
 });
 
 module.exports = router;
