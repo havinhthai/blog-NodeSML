@@ -75,7 +75,7 @@
                     <td>Free</td>
                     <td><%= new Date(article.updatedAt).toLocaleDateString() %></td>
                     <td>
-                      <a href="#" class="btn btn-warning">Chỉnh sửa</a>
+                      <a href="/admin/article/edit/<%= article._id %>" class="btn btn-warning">Chỉnh sửa</a>
                       <a href="/admin/article/delete/<%= article._id %>" class="btn btn-danger">Xóa</a>
                     </td>
                   </tr>
