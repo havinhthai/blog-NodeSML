@@ -23,6 +23,10 @@ const userSchema = new Schema({
         type: Number,
         min: 6,
         max: 69,
+    },
+    avatar: {
+        type: String,
+        default: 'https://i.pinimg.com/originals/be/2d/30/be2d307e7f0004d3b014ee1120756a93.jpg',
     }
 }, { 
     timestamps: true,

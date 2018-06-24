@@ -43,6 +43,17 @@
             <div class="box">
               <div class="box-header">
                 <h3 class="box-title">Data Table With Full Features</h3>
+
+                      <% if (flash_messages) { %>
+                        <%  for (let prop in flash_messages) { %>
+                          <% flash_messages[prop].forEach(e => { %>
+                            <div class="alert alert-<%= prop %>" role="alert">
+                              <%= e %>
+                            </div>
+                          <% }) %>         
+                        <% } %>
+                      <% } %>
+
               </div>
               <!-- /.box-header -->
               <div class="box-body">
@@ -57,30 +68,19 @@
                   </tr>
                   </thead>
                   <tbody>
+                  <% articles.forEach((article) => { %>
                   <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 4.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td> 4</td>
+                    <td><%= article.title %></td>
+                    <td><%= article.author.email %></td>
+                    <td>Free</td>
+                    <td><%= new Date(article.updatedAt).toLocaleDateString() %></td>
                     <td>
-                      <a href="#" class="btn btn-warning">Chỉnh sửa</a>
-                      <a href="#" class="btn btn-danger">Xóa</a>
+                      <a href="/admin/article/edit/<%= article._id %>" class="btn btn-warning">Chỉnh sửa</a>
+                      <a href="/admin/article/delete/<%= article._id %>" class="btn btn-danger">Xóa</a>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>Internet
-                      Explorer 5.0
-                    </td>
-                    <td>Win 95+</td>
-                    <td>5</td>
-                    <td>
-                      <a href="#" class="btn btn-warning">Chỉnh sửa</a>
-                      <a href="#" class="btn btn-danger">Xóa</a>
-                    </td>
-                  </tr>
+                  <% }); %>
+                
                   </tbody>
                   <tfoot>
                   <tr>

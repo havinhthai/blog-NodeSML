@@ -49,12 +49,12 @@
         <% } %>
 
 
-        <form action="/admin/article/add" method="post">
+        <form action="/admin/article/edit/<%= article._id %>" method="post">
           <div class="form-group">
             <label for="title">Tiêu đề</label>
   
             <input 
-              value="<%= flash_messages ? flash_messages['objBody'][0].title : '' %>"
+              value="<%= checkMessage(flash_messages, 'title') %>"
               type="text" class="form-control" name="title" id="title" autocomplete="off" autofocus placeholder="Nhập tiêu đề bài đăng">
           </div>
           <div class="form-group">
@@ -64,7 +64,7 @@
               name="description" 
               id="description" autocomplete="off"
               placeholder="Nhập mô tả"
-            ><%= flash_messages ? flash_messages['objBody'][0].description : '' %></textarea>
+            ><%= checkMessage(flash_messages, 'description') %></textarea>
           </div>
           <div class="form-group">
             <label for="content">Nội dung</label>
@@ -73,7 +73,7 @@
               id="content" name="content" 
               autocomplete="off" 
               placeholder="Nội dung bài đăng"
-            ><%= flash_messages ? flash_messages['objBody'][0].content : '' %></textarea>
+            ><%= checkMessage(flash_messages, 'content') %></textarea>
           </div>
           <div class="form-group">
             <label for="author">Tác giả</label>
