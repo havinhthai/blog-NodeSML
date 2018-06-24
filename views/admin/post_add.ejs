@@ -36,7 +36,7 @@
       <!-- Main content -->
       <section class="content container">
 
-        <form action="" method="post">
+        <form action="/admin/article/add" method="post">
           <div class="form-group">
             <label for="title">Tiêu đề</label>
             <input type="text" class="form-control" name="title" id="title" autocomplete="off" autofocus placeholder="Nhập tiêu đề bài đăng">
@@ -51,7 +51,8 @@
           </div>
           <div class="form-group">
             <label for="author">Tác giả</label>
-            <input type="text" class="form-control" name="author" id="author" autocomplete="off" value="Tác giả" disabled>
+            <input type="text" class="form-control" id="author" autocomplete="off" value="<%= cUser.email %>" disabled>
+            <input type="hidden" name="author" value="<%= cUser._id %>" />
           </div>
           <div class="form-group">
             <label for="category">Chuyên mục</label>
@@ -62,6 +63,10 @@
               <option value="Pattern">Pattern</option>
               <option value="Other">Other</option>
             </select>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-block btn-flat">Đăng bài</button>
           </div>
         </form>
       </section>
@@ -80,7 +85,7 @@
 
   <script src="/public/admin/vendors/select2/dist/js/select2.full.min.js"></script>
   <script src="/public/admin/vendors/tinymce/tinymce.min.js"></script>
-  <script src="/public/admin/js/post_add.min.js"></script>
+  <script src="/public/admin/js/post_add.js"></script>
 
 </body>
 </html>

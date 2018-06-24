@@ -16,7 +16,6 @@ const articleSchema = new Schema({
     },
     url: {
         type: String,
-        required: true,
         trim: true,
     },
     author: {

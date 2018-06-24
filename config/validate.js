@@ -3,7 +3,7 @@ const {
 } = require('express-validator/check');
 
 const checkLogin = [
-    check('username').not().isEmail().withMessage('Email invalid'),
+    check('username').isEmail().withMessage('Email invalid'),
     check('password').not().isEmpty().withMessage('Password is required'),
 ];
 

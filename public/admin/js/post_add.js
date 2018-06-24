@@ -8,7 +8,6 @@ tinymce.init({
     ],
     toolbar1: 'undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media',
     toolbar2: 'preview | forecolor backcolor emoticons |  fontselect fontsizeselect',
-    language: 'vi_VN',
     image_title: true,
     image_advtab: true,
     automatic_uploads: true,
