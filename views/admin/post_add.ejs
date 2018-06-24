@@ -35,19 +35,45 @@
 
       <!-- Main content -->
       <section class="content container">
+        
+         <% if (flash_messages) { %>
+          <%  for (let prop in flash_messages) { %>
+            <% if (prop !== 'objBody') { %>
+               <% flash_messages[prop].forEach(e => { %>
+                <div class="alert alert-<%= prop %>" role="alert">
+                  <%= e %>
+                </div>
+              <% }) %>   
+            <% } %>      
+          <% } %>
+        <% } %>
+
 
         <form action="/admin/article/add" method="post">
           <div class="form-group">
             <label for="title">Tiêu đề</label>
-            <input type="text" class="form-control" name="title" id="title" autocomplete="off" autofocus placeholder="Nhập tiêu đề bài đăng">
+  
+            <input 
+              value="<%= flash_messages ? flash_messages['objBody'][0].title : '' %>"
+              type="text" class="form-control" name="title" id="title" autocomplete="off" autofocus placeholder="Nhập tiêu đề bài đăng">
           </div>
           <div class="form-group">
             <label for="description">Mô tả</label>
-            <textarea class="form-control" name="description" id="description" autocomplete="off" placeholder="Nhập mô tả"></textarea>
+            <textarea 
+              class="form-control" 
+              name="description" 
+              id="description" autocomplete="off"
+              placeholder="Nhập mô tả"
+            ><%= flash_messages ? flash_messages['objBody'][0].description : '' %></textarea>
           </div>
           <div class="form-group">
             <label for="content">Nội dung</label>
-            <textarea class="form-control" rows="10" id="content" name="content" autocomplete="off" placeholder="Nội dung bài đăng"></textarea>
+            <textarea 
+              class="form-control" rows="10" 
+              id="content" name="content" 
+              autocomplete="off" 
+              placeholder="Nội dung bài đăng"
+            ><%= flash_messages ? flash_messages['objBody'][0].content : '' %></textarea>
           </div>
           <div class="form-group">
             <label for="author">Tác giả</label>

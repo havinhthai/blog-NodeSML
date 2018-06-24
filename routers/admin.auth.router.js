@@ -13,12 +13,6 @@ const {
     checkRegister
 } = require('../config/validate');
 
-router.use((req, res, next) => {
-    res.locals.flash_messages = req.session.flash;
-    delete req.session.flash;
-    next();
-});
-
 router.use(['/login', '/register'], (req, res, next) => {
     if (req.session.user) {
         return res.redirect('/admin/dashboard');
