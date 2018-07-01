@@ -2,13 +2,19 @@ const express = require('express');
 const router = express.Router();
 
 const {
+    middlewareModify,
     getArticle,
     addArticle,
     editArticle,
     deleteArticle,
     getArticles,
+    getArticlesByUser,
 } = require('../controllers/admin.article.controller');
 const { checkArticle } = require('../config/validate');
+
+router.use(['/delete/:id', '/edit/:id'], (req, res, next) => {
+    middlewareModify(req, res, next);
+});
 
 router.route('/add')
     .get((req, res) => {
@@ -32,6 +38,10 @@ router.route('/edit/:id')
 
 router.get('/manage', (req, res) => {
     getArticles(req, res);
+});
+
+router.get('/manage-by-author', (req, res) => {
+    getArticlesByUser(req, res);
 });
 
 module.exports = router;

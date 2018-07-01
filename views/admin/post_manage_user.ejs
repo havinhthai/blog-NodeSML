@@ -64,6 +64,7 @@
                     <th>Tác giả</th>
                     <th>Chuyên mục</th>
                     <th>Ngày cập nhật</th>
+                    <th>Tùy chọn</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -73,6 +74,10 @@
                     <td><%= article.author.email %></td>
                     <td>Free</td>
                     <td><%= new Date(article.updatedAt).toLocaleDateString() %></td>
+                    <td>
+                      <a href="/admin/article/edit/<%= article._id %>" class="btn btn-warning">Chỉnh sửa</a>
+                      <a href="/admin/article/delete/<%= article._id %>" class="btn btn-danger">Xóa</a>
+                    </td>
                   </tr>
                   <% }); %>
                 
@@ -83,6 +88,7 @@
                     <th>Tác giả</th>
                     <th>Chuyên mục</th>
                     <th>Ngày cập nhật</th>
+                    <th>Tùy chọn</th>
                   </tr>
                   </tfoot>
                 </table>

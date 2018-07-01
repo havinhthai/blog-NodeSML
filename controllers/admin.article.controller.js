@@ -4,6 +4,28 @@ const {
 
 const Article = require('../models/blog/article.model');
 
+const middlewareModify = (req, res, next) =>{
+    const articleId = req.params.id;
+    const userId = req.session.user._id;
+
+    Article
+        .findById(articleId)
+        .exec((err, article) => {
+            if (err) {
+                return next(err);
+            }
+
+            if (!article) return next(new Error('Article not found'));
+
+            if (article.author.toString() !== userId) {
+                req.flash('danger', 'Access dined');
+                return res.redirect('/admin/article/manage');
+            }
+
+            next();
+        });
+}
+
 const getArticle = (req, res) => {
     Article.findById(req.params.id, (err, article) => {
         if (err) {
@@ -139,7 +161,7 @@ const deleteArticle = (req, res) => {
 };
 
 const getArticles = (req, res) => {
-     Article
+    Article
         .find()
         .populate('author', '-_id email')
         .select({
@@ -159,10 +181,35 @@ const getArticles = (req, res) => {
         });
 }
 
+const getArticlesByUser = (req, res) => {
+    const userId = req.session.user._id;
+        
+    Article
+        .find({ author: userId })
+        .populate('author', '-_id email')
+        .select({
+            title: 1,
+            author: 1,
+            updatedAt: 1,
+        })
+        .exec((err, articles) => {
+            if (err) {
+                console.log(err);
+                return;
+            }
+
+            res.render('admin/post_manage_user', {
+                articles,
+            });
+        });
+}
+
 module.exports = {
+    middlewareModify,
     getArticle,
     addArticle,
     editArticle,
     deleteArticle,
     getArticles,
+    getArticlesByUser,
 };
