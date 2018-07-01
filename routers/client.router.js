@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {
     getAllArticles,
+    getArticleByUrl,
  } = require('../controllers/client.article.controller');
 
 router.get('/', (req, res, next) => {
@@ -17,8 +18,8 @@ router.get('/contact', (req, res) => {
     res.render('client/contact');
 });
 
-router.get('/post', (req, res) => {
-    res.render('client/post');
+router.get('/post/:url', (req, res, next) => {
+    getArticleByUrl(req, res, next);
 });
 
 module.exports = router;
