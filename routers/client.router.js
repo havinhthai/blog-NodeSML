@@ -1,19 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-// router.get('/', (req, res) => {
-//     res.send('Hello JS');
-// });
+const {
+    getAllArticles,
+ } = require('../controllers/client.article.controller');
 
-// router.get('/json', (req, res) => {
-//     res.json({
-//         name: 'Thai',
-//         language: 'JS',
-//     });
-// });
-
-router.get('/', (req, res) => {
-    res.render('client/index');
+router.get('/', (req, res, next) => {
+    getAllArticles(req, res, next);
 });
 
 router.get('/about', (req, res) => {

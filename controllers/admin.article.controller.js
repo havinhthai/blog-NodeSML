@@ -11,9 +11,7 @@ const middlewareModify = (req, res, next) =>{
     Article
         .findById(articleId)
         .exec((err, article) => {
-            if (err) {
-                return next(err);
-            }
+            if (err) next(err);
 
             if (!article) return next(new Error('Article not found'));
 
