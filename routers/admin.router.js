@@ -3,6 +3,7 @@ const router = express.Router();
 
 const authAdminRouter = require('./admin.auth.router');
 const articleRouter = require('./admin.article.router');
+const categoryRouter = require('./admin.category.router');
 
 router.use((req, res, next) => {
     res.locals.flash_messages = req.session.flash;
@@ -12,5 +13,6 @@ router.use((req, res, next) => {
 
 router.use('/', authAdminRouter);
 router.use('/article', articleRouter);
+router.use('/category', categoryRouter);
 
 module.exports = router;
