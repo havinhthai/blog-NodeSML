@@ -25,7 +25,7 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          Đăng bài <small>Optional description</small>
+          Cập nhật chuyên mục <small>Optional description</small>
         </h1>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -49,18 +49,18 @@
         <% } %>
 
 
-        <form action="" method="">
+        <form action="/admin/category/edit/<%= category._id %>" method="POST">
           <div class="form-group">
             <label for="title">Tiêu đề</label>
   
             <input 
-              value=""
+              value="<%= category.name %>"
               type="text" class="form-control" name="title" id="title" 
               autocomplete="off" autofocus placeholder="Nhập tên chuyên mục">
           </div>
 
           <div class="form-group">
-            <button type="submit" class="btn btn-success btn-block btn-flat">Upload chuyên mục</button>
+            <button type="submit" class="btn btn-success btn-block btn-flat">Cập nhật</button>
           </div>
         </form>
       </section>

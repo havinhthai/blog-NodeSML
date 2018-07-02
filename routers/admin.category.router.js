@@ -3,19 +3,31 @@ const router = express.Router();
 
 const { 
     getAllCategories,
+    getCategoryById,
     postNewCategory,
+    editCategory,
+    deleteCategory,
 } = require('../controllers/admin.category.controller');
+const { checkCategory } = require('../config/validate');
 
 router.route('/add')
     .get((req, res) => {
         res.render('admin/category_add');
     })
-    .post((req, res, next) => {
+    .post(checkCategory, (req, res, next) => {
         postNewCategory(req, res, next);
     });
 
-router.get('/edit', (req, res) => {
-    res.render('admin/category_edit');
+router.route('/edit/:id')
+    .get((req, res, next) => {
+        getCategoryById(req, res, next);
+    })
+    .post(checkCategory, (req, res, next) => {
+        editCategory(req, res, next);
+    });
+
+router.get('/delete/:id', (req, res, next) => {
+    deleteCategory(req, res, next);
 });
 
 router.get('/manage', (req, res, next) => {

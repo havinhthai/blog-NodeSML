@@ -23,8 +23,13 @@ const checkArticle = [
     check('author').not().isEmpty().withMessage('Author is required'),
 ];
 
+const checkCategory = [
+    check('title').not().isEmpty().withMessage('Title is required'),
+];
+
 module.exports = {
     checkLogin,
     checkRegister,
     checkArticle,
+    checkCategory,
 };
