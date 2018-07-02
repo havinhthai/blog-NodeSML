@@ -63,15 +63,22 @@
                     <th>Tên</th>
                     <th>URL</th>
                     <th>Ngày cập nhật</th>
+                    <th>Tùy chỉnh</th>
                   </tr>
                   </thead>
                   <tbody>
-            
-                  <tr>
-                    <td>Name</td>
-                    <td>URL</td>
-                    <td>UpdatedAt</td>
+
+                  <% categories.forEach((category) => { %>
+                   <tr>
+                    <td><%= category.name %></td>
+                    <td><%= category.url %></td>
+                    <td><%= new Date(category.updatedAt).toLocaleDateString() %></td>
+                     <td>
+                      <a href="/admin/category/edit/<%= category._id %>" class="btn btn-warning">Chỉnh sửa</a>
+                      <a href="/admin/category/delete/<%= category._id %>" class="btn btn-danger">Xóa</a>
+                    </td>
                   </tr>
+                  <% }); %>                 
                 
                   </tbody>
                   <tfoot>
@@ -79,6 +86,7 @@
                     <th>Tên</th>
                     <th>URL</th>
                     <th>Ngày cập nhật</th>
+                    <th>Tùy chỉnh</th>
                   </tr>
                   </tfoot>
                 </table>
