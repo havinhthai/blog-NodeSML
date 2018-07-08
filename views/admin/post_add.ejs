@@ -34,7 +34,7 @@
       </section>
 
       <!-- Main content -->
-      <section class="content container">
+      <section>
         
          <% if (flash_messages) { %>
           <%  for (let prop in flash_messages) { %>
@@ -49,7 +49,8 @@
         <% } %>
 
 
-        <form action="/admin/article/add" method="post">
+      <div class="col-md-9">
+         <form action="/admin/article/add" method="post">
           <div class="form-group">
             <label for="title">Tiêu đề</label>
   
@@ -93,6 +94,18 @@
             <button type="submit" class="btn btn-success btn-block btn-flat">Đăng bài</button>
           </div>
         </form>
+       </div>
+
+       <div class="col-md-3">
+        <form action="/admin/article/image" method="post" enctype="multipart/form-data" id="imgUpdate">
+          <img 
+            src="https://image.dhgate.com/0x0/f2/albu/g7/M00/26/EF/rBVaSlrpYYuAWcolAAElEsVrv8c802.jpg" 
+            style="width: 100%; height: auto"  
+          />
+
+          <input type="file" style="margin-top: 10px" name="image" id="file" />
+        </form>
+       </div>
       </section>
       <!-- /.content -->
     </div>
@@ -110,6 +123,10 @@
   <script src="/public/admin/vendors/select2/dist/js/select2.full.min.js"></script>
   <script src="/public/admin/vendors/tinymce/tinymce.min.js"></script>
   <script src="/public/admin/js/post_add.js"></script>
-
+  <script>
+    document.getElementById('file').onchange = function() {
+        document.getElementById('imgUpdate').submit();
+    };
+  </script>
 </body>
 </html>

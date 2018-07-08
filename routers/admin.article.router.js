@@ -10,6 +10,7 @@ const {
     deleteArticle,
     getArticles,
     getArticlesByUser,
+    updateImageArticle,
 } = require('../controllers/admin.article.controller');
 const { checkArticle } = require('../config/validate');
 
@@ -28,5 +29,7 @@ router.route('/edit/:id')
 router.get('/manage', getArticles);
 
 router.get('/manage-by-author', getArticlesByUser);
+
+router.post('/image', updateImageArticle);
 
 module.exports = router;

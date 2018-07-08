@@ -6,6 +6,8 @@ const { parallel } = require('async');
 const Article = require('../models/blog/article.model');
 const Category = require('../models/blog/category.model');
 
+const upload = require('../config/multerConfig');
+
 const middlewareModify = (req, res, next) =>{
     const articleId = req.params.id;
     const userId = req.session.user._id;
@@ -269,6 +271,15 @@ const getArticlesByUser = (req, res) => {
         });
 }
 
+const updateImageArticle = (req, res, next) => {
+    upload.single('image')(req, res, (err) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+    });
+}
+
 module.exports = {
     middlewareModify,
     getArticles,
@@ -278,4 +289,5 @@ module.exports = {
     addArticle,
     editArticle,
     deleteArticle,
+    updateImageArticle,
 };
