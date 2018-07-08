@@ -1,25 +1,58 @@
 const {
     validationResult
 } = require('express-validator/check');
+const { parallel } = require('async');
 
 const Category = require('../models/blog/category.model');
 
 const getAllCategories = (req, res, next) => {
-    Category
-        .find()
-        .select('-createdAt -__v')
-        .exec((err, categories) => {
-            if (err) {
-                const error = new Error('Internal Server Error');
-                error.status = 500;
+    const { page } = req.params;
+    const configPage = page > 0 ? page : 1;
+    const limitPerPage = 2;
 
-                return next(error);
-            }
+    parallel([
+        (cb) => {
+            Category
+                .find()
+                .limit(limitPerPage)
+                .skip(limitPerPage * configPage - limitPerPage)
+                .select('-createdAt -__v')
+                .exec((err, categories) => {
+                    if (err) {
+                        const error = new Error('Internal Server Error');
+                        error.status = 500;
 
-            res.render('admin/category_manage', {
-                categories,
-            });
+                        return cb(error);
+                    }
+
+                    cb(null, categories);
+                });
+        },
+        (cb) => {
+             Category.count().exec((err, totalCategories) => {
+                  if (err) {
+                      const error = new Error('Internal Server Error');
+                      error.status = 500;
+
+                      return cb(error);
+                  }
+
+                cb(null, totalCategories);
+             });
+        }
+    ], (err, result) => {
+        if (err) {
+            return next(err);
+        }
+
+        console.log(result[1]);
+
+        res.render('admin/category_manage', {
+            categories: result[0],
+            totalPage: Math.ceil(result[1] / limitPerPage),
+            currentPage: configPage,
         });
+    })  
 }
 
 const getCategoryById = (req, res, next) => {

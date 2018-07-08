@@ -90,6 +90,11 @@
                   </tr>
                   </tfoot>
                 </table>
+                <ul class="pagination">
+                  <% for (var i = 1; i <= totalPage; i++) { %>
+                    <li class="<% if (i.toString() === currentPage.toString()) { %>active<% } %>"><a href="/admin/category/manage/page-<%= i %>"><%= i %></a></li>
+                  <% } %>
+                </ul>
               </div>
               <!-- /.box-body -->
             </div>

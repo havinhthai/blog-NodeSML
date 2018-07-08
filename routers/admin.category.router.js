@@ -30,7 +30,7 @@ router.get('/delete/:id', (req, res, next) => {
     deleteCategory(req, res, next);
 });
 
-router.get('/manage', (req, res, next) => {
+router.get(['/manage', '/manage/page-:page'], (req, res, next) => {
     getAllCategories(req, res, next);
 });
 
