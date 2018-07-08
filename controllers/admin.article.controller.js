@@ -1,6 +1,7 @@
 const {
     validationResult
 } = require('express-validator/check');
+const { parallel } = require('async');
 
 const Article = require('../models/blog/article.model');
 const Category = require('../models/blog/category.model');
@@ -26,25 +27,61 @@ const middlewareModify = (req, res, next) =>{
 }
 
 const getArticle = (req, res) => {
-    Article.findById(req.params.id, (err, article) => {
+    parallel([
+        (cb) => {
+            Article
+                .findById(req.params.id)
+                .populate('categories', 'name')
+                .exec((err, article) => {
+                    if (err) {
+                        return cb(err);
+                    }
+
+                    cb(null, article);
+
+                    // if (!article) {
+                    //     req.flash('danger', 'Can not found article');
+                    //     return res.redirect('/admin/article/manage');
+                    // }
+
+                    // const checkMessage = (flash_messages, prop) => (
+                    //     flash_messages && flash_messages['objBody'] ?
+                    //     flash_messages['objBody'][0][prop] :
+                    //     article[prop]
+                    // );
+
+                    // res.render('admin/post_edit', {
+                    //     article,
+                    //     checkMessage,
+                    // });
+                });
+        },
+        (cb) => {
+            Category
+                .find()
+                .exec((err, categories) => {
+                    if (err) {
+                        return cb(err);
+                    }
+
+                    cb(null, categories);
+                });
+        }
+    ], (err, result) => {
         if (err) {
             console.log(err);
             return;
         }
 
-        if (!article) {
-            req.flash('danger', 'Can not found article');
-            return res.redirect('/admin/article/manage');
-        }
-
         const checkMessage = (flash_messages, prop) => (
             flash_messages && flash_messages['objBody'] ?
             flash_messages['objBody'][0][prop] :
-            article[prop]
+            result[0][prop]
         );
 
         res.render('admin/post_edit', {
-            article,
+            article: result[0],
+            categories: result[1],
             checkMessage,
         });
     });
@@ -100,7 +137,9 @@ const addArticle = (req, res, next) => {
     article.description = description;
     article.content = content;
     article.author = author;
-    article.categories = categories;
+    if (categories) {
+        article.categories = categories;
+    }
 
     article.save((err, post) => {
         if (err) {
@@ -119,6 +158,7 @@ const editArticle = (req, res) => {
         title,
         description,
         content,
+        categories,
     } = req.body;
     const {
         id
@@ -154,6 +194,7 @@ const editArticle = (req, res) => {
         article.title = title;
         article.description = description;
         article.content = content;
+        article.categories = categories;
 
         article.save((err) => {
             if (err) {
