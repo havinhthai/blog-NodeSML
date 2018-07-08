@@ -3,6 +3,7 @@ const {
 } = require('express-validator/check');
 
 const Article = require('../models/blog/article.model');
+const Category = require('../models/blog/category.model');
 
 const middlewareModify = (req, res, next) =>{
     const articleId = req.params.id;
@@ -17,7 +18,7 @@ const middlewareModify = (req, res, next) =>{
 
             if (article.author.toString() !== userId) {
                 req.flash('danger', 'Access dined');
-                return res.redirect('/admin/article/manage');
+                return res.status(403).redirect('/admin/article/manage');
             }
 
             next();
@@ -49,12 +50,32 @@ const getArticle = (req, res) => {
     });
 }
 
+const getAddArticlePage = async (req, res, next) => {
+    try {
+        const categories = await Category.find().select('name');
+
+        res.render('admin/post_add', {
+            categories,
+        });
+
+    } catch (err) {
+        const error = {
+            status: 500,
+            message: 'Interval Error',
+            payload: err,
+        }
+
+        next(error);
+    }
+}
+
 const addArticle = (req, res, next) => {
     const {
         title,
         description,
         content,
         author,
+        categories,
     } = req.body;
 
     const errors = validationResult(req);
@@ -73,14 +94,15 @@ const addArticle = (req, res, next) => {
         return res.redirect('/admin/article/add');
     }
 
-    const article = new Article({
-        title,
-        description,
-        content,
-        author,
-    });
+    const article = new Article();
 
-    article.save((err) => {
+    article.title = title;
+    article.description = description;
+    article.content = content;
+    article.author = author;
+    article.categories = categories;
+
+    article.save((err, post) => {
         if (err) {
             console.log(err);
             req.flash('danger', 'Add article failed');
@@ -161,6 +183,7 @@ const deleteArticle = (req, res) => {
 const getArticles = (req, res) => {
     Article
         .find()
+        .sort({ updatedAt: -1})
         .populate('author', '-_id email')
         .select({
             title: 1,
@@ -204,10 +227,11 @@ const getArticlesByUser = (req, res) => {
 
 module.exports = {
     middlewareModify,
+    getArticles,
+    getArticlesByUser,
     getArticle,
+    getAddArticlePage,
     addArticle,
     editArticle,
     deleteArticle,
-    getArticles,
-    getArticlesByUser,
 };

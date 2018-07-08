@@ -4,6 +4,7 @@ const router = express.Router();
 const {
     middlewareModify,
     getArticle,
+    getAddArticlePage,
     addArticle,
     editArticle,
     deleteArticle,
@@ -15,9 +16,7 @@ const { checkArticle } = require('../config/validate');
 router.use(['/delete/:id', '/edit/:id'], middlewareModify);
 
 router.route('/add')
-    .get((req, res) => {
-        res.render('admin/post_add');
-    })
+    .get(getAddArticlePage)
     .post(checkArticle, addArticle);
 
 router.get('/delete/:id', deleteArticle);

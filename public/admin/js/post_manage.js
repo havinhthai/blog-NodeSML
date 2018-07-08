@@ -1,6 +1,4 @@
 $(function () {
-    $("#dataManager").DataTable();
-
     $('.btn-danger').click(function (e) {
         swal({
             title: 'Are you sure?',

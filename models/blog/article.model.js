@@ -22,6 +22,10 @@ const articleSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'users',
     },
+    categories: [{
+        type: Schema.Types.ObjectId,
+        ref: 'categories',
+    }],
 }, {
     timestamps: true,
 });

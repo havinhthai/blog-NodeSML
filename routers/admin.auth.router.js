@@ -22,7 +22,7 @@ router.use(['/login', '/register'], (req, res, next) => {
 });
 
 router.route('/login')
-    .get((req, res) => renderLogin)
+    .get(renderLogin)
     .post(checkLogin, loginController);
 
 router.route('/register')
