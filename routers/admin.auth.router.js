@@ -22,20 +22,14 @@ router.use(['/login', '/register'], (req, res, next) => {
 });
 
 router.route('/login')
-    .get((req, res) => {
-        renderLogin(req, res);
-    })
-    .post(checkLogin, (req, res) => {
-        loginController(req, res);
-    });
+    .get((req, res) => renderLogin)
+    .post(checkLogin, loginController);
 
 router.route('/register')
     .get((req, res) => {
         res.render('admin/register');
     })
-    .post(checkRegister, (req, res) => {
-        registerController(req, res);
-    });
+    .post(checkRegister, registerController);
 
 router.use((req, res, next) => {
     if (req.session.user) {
@@ -63,8 +57,6 @@ router.get('/profile', (req, res) => {
     res.render('admin/profile');
 });
 
-router.get('/logout', (req, res) => {
-    logoutController(req, res);
-});
+router.get('/logout', logoutController);
 
 module.exports = router;

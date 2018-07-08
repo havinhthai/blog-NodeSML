@@ -12,36 +12,22 @@ const {
 } = require('../controllers/admin.article.controller');
 const { checkArticle } = require('../config/validate');
 
-router.use(['/delete/:id', '/edit/:id'], (req, res, next) => {
-    middlewareModify(req, res, next);
-});
+router.use(['/delete/:id', '/edit/:id'], middlewareModify);
 
 router.route('/add')
     .get((req, res) => {
         res.render('admin/post_add');
     })
-    .post(checkArticle, (req, res) => {
-        addArticle(req, res);
-    });
+    .post(checkArticle, addArticle);
 
-router.get('/delete/:id', (req, res) => {
-    deleteArticle(req, res);
-});
+router.get('/delete/:id', deleteArticle);
 
 router.route('/edit/:id')
-    .get((req, res) => {
-        getArticle(req, res);
-    })
-    .post(checkArticle, (req, res) => {
-        editArticle(req, res);
-    });
+    .get(getArticle)
+    .post(checkArticle, editArticle);
 
-router.get('/manage', (req, res) => {
-    getArticles(req, res);
-});
+router.get('/manage', getArticles);
 
-router.get('/manage-by-author', (req, res) => {
-    getArticlesByUser(req, res);
-});
+router.get('/manage-by-author', getArticlesByUser);
 
 module.exports = router;
