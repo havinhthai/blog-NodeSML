@@ -71,7 +71,11 @@
                   <tr>
                     <td><%= article.title %></td>
                     <td><%= article.author.email %></td>
-                    <td>Free</td>
+                    <td>
+                      <% article.categories.forEach(category => { %>
+                      <span class="badge label-primary"><%= category.name %></span>
+                      <% }) %>
+                    </td>
                     <td><%= new Date(article.updatedAt).toLocaleDateString() %></td>
                   </tr>
                   <% }); %>

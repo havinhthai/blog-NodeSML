@@ -185,6 +185,7 @@ const getArticles = (req, res) => {
         .find()
         .sort({ updatedAt: -1})
         .populate('author', '-_id email')
+        .populate('categories', '-_id name')
         .select({
             title: 1,
             author: 1,
@@ -195,6 +196,8 @@ const getArticles = (req, res) => {
                 console.log(err);
                 return;
             }
+
+            console.log('>> articles', articles);
 
             res.render('admin/post_manage', {
                 articles,
